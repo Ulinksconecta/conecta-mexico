@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conecta México – Donaciones</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #0074d9;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 10px;
+    }
+    h1, h2 {
+      color: #0074d9;
+    }
+    .donation-buttons a {
+      display: block;
+      background-color: #2ecc40;
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .section {
+      margin-top: 2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    blockquote {
+      background-color: #e7f3ff;
+      border-left: 5px solid #0074d9;
+      margin: 1rem 0;
+      padding: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Conecta México</h1>
+  <p>Con 1 peso conectas una vida</p>
+</header>
+
+<main>
+  <section>
+    <h2>¿Por qué donar?</h2>
+    <p>
+      Miles de comunidades en México aún no tienen acceso a internet.
+      Tú puedes cambiar eso con solo <strong>$1 peso a la semana</strong>.
+    </p>
+    <p>
+      Tu ayuda permite instalar infraestructura, conectar pueblos, y abrir puertas al conocimiento, ingresos y desarrollo.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Elige tu forma de ayudar</h2>
+    <div class="donation-buttons">
+      <a href="https://mpago.la/link-1peso">$1 por semana – Un pequeño gesto, una gran diferencia</a>
+      <a href="https://mpago.la/link-10pesos">$10 por semana – Impacto constante, semana tras semana</a>
+      <a href="https://mpago.la/link-40mensual">$40 al mes – Una suscripción que transforma realidades</a>
+      <a href="https://mpago.la/link-100pesos">$100 único – Conectas más de lo que imaginas</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>¿A dónde va tu donativo?</h2>
+    <ul>
+      <li>✅ Instalación de internet comunitario</li>
+      <li>✅ Mantenimiento y energía solar</li>
+      <li>✅ Equipo básico (routers, repetidores)</li>
+      <li>✅ Capacitación digital básica</li>
+    </ul>
+    <p>
+      Publicamos informes mensuales con:
+      <ul>
+        <li>Total recaudado</li>
+        <li>Comunidades conectadas</li>
+        <li>Fotos, avances y comprobantes</li>
+      </ul>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Testimonios</h2>
+    <blockquote>
+      “Nunca imaginé que con internet mi hijo pudiera aprender tantas cosas desde aquí. Gracias a todos los que donan.”
+      <br>– María, madre en Oaxaca
+    </blockquote>
+    <blockquote>
+      “Vendía poco en mi taller. Ahora, con internet, mis productos se conocen en otros estados.”
+      <br>– Don Pedro, artesano en Chiapas
+    </blockquote>
+  </section>
+
+  <section class="section">
+    <h2>Multiplica el impacto</h2>
+    <p>
+      Comparte esta página y cuéntales por qué decidiste ayudar.  
+      Usa el hashtag: <strong>#ConectaMéxico</strong>
+    </p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Conecta México – Todos los derechos reservados
+</footer>
+
+</body>
+</html>
