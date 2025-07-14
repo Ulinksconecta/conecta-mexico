@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conectando México - Transformando el Futuro de las Comunidades Rurales</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+    
+    /* Header */
+    header { background: linear-gradient(135deg, #004080 0%, #003366 100%); color: #fff; padding: 1rem 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    .header-content { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+    
+    /* Logo Container */
+    .logo-container { display: flex; align-items: center; gap: 1rem; }
+    .logo-image { height: 50px; width: 50px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .logo-image img { width: 100%; height: 100%; object-fit: contain; }
+    .logo-placeholder { color: #004080; font-size: 1.5rem; font-weight: bold; }
+    .logo-text { color: #fff; font-size: 1.2rem; font-weight: bold; }
+    
+    nav { display: flex; gap: 1rem; }
+    nav a { color: #fff; text-decoration: none; padding: 0.5rem 1rem; font-weight: 500; transition: all 0.3s; border-radius: 5px; }
+    nav a:hover { color: #ffcc00; background: rgba(255,255,255,0.1); }
+    .language-switcher select { background: #fff; color: #004080; padding: 0.5rem; border: none; border-radius: 5px; cursor: pointer; }
+    
+    /* Mobile menu */
+    .mobile-menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+    .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #004080; flex-direction: column; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 999; }
+    .mobile-nav a { padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .mobile-nav.active { display: flex; }
+    
+    /* Hero Section */
+    .hero { background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), radial-gradient(circle at 30% 70%, rgba(255,204,0,0.1), transparent 50%); color: #fff; text-align: center; padding: 4rem 2rem; position: relative; overflow: hidden; min-height: 60vh; display: flex; align-items: center; justify-content: center; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,204,0,0.1) 50%, transparent 70%); }
+    .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero p { font-size: clamp(1.1rem, 3vw, 1.4rem); margin-bottom: 2rem; opacity: 0.95; }
+    .btn-primary { background: linear-gradient(45deg, #ffcc00, #f0b400); color: #000; padding: 1rem 2rem; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2em; box-shadow: 0 4px 15px rgba(255,204,0,0.3); transition: all 0.3s; display: inline-block; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,204,0,0.4); }
+    
+    /* Progress Bar */
+    .progress-section { background: #f8f9fa; padding: 2rem; text-align: center; }
+    .progress-container { max-width: 600px; margin: 0 auto; }
+    .progress-bar { background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden; margin: 1rem 0; }
+    .progress-fill { background: linear-gradient(45deg, #28a745, #20c997); height: 100%; width: 23%; transition: width 0.3s; }
+    .progress-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .stat { text-align: center; padding: 1rem; }
+    .stat-number { font-size: 1.5em; font-weight: bold; color: #004080; }
+    .stat-label { color: #666; font-size: 0.9em; }
+    
+    /* Sections */
+    section { padding: 3rem 2rem; max-width: 1200px; margin: auto; }
+    section h2 { font-size: clamp(2rem, 4vw, 2.5rem); color: #004080; margin-bottom: 1.5rem; text-align: center; }
+    section h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); color: #004080; margin-bottom: 1rem; }
+    
+    /* Story Section */
+    .story-content { max-width: 800px; margin: 0 auto; }
+    .story-highlight { background: linear-gradient(135deg, #fff3cd, #ffeaa7); padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 5px solid #ffcc00; }
+    .story-highlight h3 { color: #856404; margin-bottom: 1rem; }
+    .story-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .story-stat { text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 10px; }
+    .story-stat-number { font-size: 2.5em; font-weight: bold; color: #004080; }
+    .story-stat-label { color: #666; margin-top: 0.5rem; }
+    
+    /* Impact Section */
+    .impact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .impact-item { background: #fff; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .impact-item:hover { transform: translateY(-5px); }
+    .impact-item-image { width: 100%; height: 200px; background: linear-gradient(45deg, #004080, #003366); border-radius: 10px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 3rem; }
+    .impact-item h3 { color: #004080; margin-bottom: 1rem; }
+    .impact-item p { color: #666; margin-bottom: 1rem; }
+    .impact-badge { background: #28a745; color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9em; display: inline-block; margin-bottom: 1rem; }
+    
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .testimonial { background: #fff; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: relative; }
+    .testimonial::before { content: '"'; position: absolute; top: -10px; left: 20px; font-size: 4em; color: #ffcc00; }
+    .testimonial p { font-style: italic; margin-bottom: 1rem; padding-left: 1rem; }
+    .testimonial cite { display: flex; align-items: center; font-style: normal; color: #004080; font-weight: bold; }
+    .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ffcc00; margin-right: 1rem; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; }
+    
+    /* Donation Section */
+    #donar { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; margin: 2rem; }
+    .donation-header { text-align: center; margin-bottom: 2rem; }
+    .donation-urgency { background: #dc3545; color: #fff; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: center; }
+    .donation-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .donation-options a { display: block; background: linear-gradient(135deg, #004080, #003366); color: #fff; padding: 1.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,64,128,0.3); }
+    .donation-options a:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,64,128,0.4); }
+    .donation-impact { background: #fff; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
+    .donation-impact h3 { color: #004080; margin-bottom: 1rem; }
+    .impact-list { list-style: none; }
+    .impact-list li { margin: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .impact-list li::before { content: '✓'; position: absolute; left: 0; color: #28a745; font-weight: bold; }
+    
+    /* Trust Section */
+    .trust-section { background: #fff; padding: 3rem 2rem; text-align: center; }
+    .trust-badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .trust-badge { padding: 1.5rem; border-radius: 10px; background: #f8f9fa; border: 2px solid #e9ecef; }
+    .trust-badge h4 { color: #004080; margin-bottom: 0.5rem; }
+    .trust-badge p { color: #666; font-size: 0.9em; }
+    
+    /* Footer */
+    footer { background: linear-gradient(135deg, #004080, #003366); color: #fff; padding: 2rem; text-align: center; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .footer-links a { color: #fff; text-decoration: none; padding: 0.5rem; }
+    .footer-links a:hover { color: #ffcc00; }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content { flex-direction: column; gap: 1rem; }
+      .mobile-menu-toggle { display: block; }
+      nav { display: none; }
+      .hero { padding: 3rem 1rem; }
+      section { padding: 2rem 1rem; }
+      .donation-options { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .impact-container { grid-template-columns: 1fr; }
+      .trust-badges { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 1rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1rem; }
+      .story-stats { grid-template-columns: 1fr; }
+      .progress-stats { grid-template-columns: 1fr; }
+      .btn-primary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <div class="logo-image">
+          <!-- Aquí va tu logotipo -->
+          <!-- <img src="ruta/a/tu/logo.png" alt="Logo Conectando México"> -->
+          <div class="logo-placeholder">CM</div>
+        </div>
+        <div class="logo-text">Conectando México</div>
+      </div>
+      <button class="mobile-menu-toggle" id="mobile-menu-btn">☰</button>
+      <nav id="desktop-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#historia">Nuestra Historia</a>
+        <a href="#impacto">Impacto</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#donar">Donar</a>
+      </nav>
+      <nav class="mobile-nav" id="mobile-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#historia">Nuestra Historia</a>
+        <a href="#impacto">Impacto</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#donar">Donar</a>
+      </nav>
+      <div class="language-switcher">
+        <select id="language-selector">
+          <option value="es" selected>Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero" id="inicio">
+    <div class="hero-content">
+      <h1>Enciende la Esperanza en México Rural</h1>
+      <p>Cada donación conecta una comunidad al futuro. Llevamos internet, electricidad solar y educación digital a los lugares más olvidados de México.</p>
+      <a href="#donar" class="btn-primary">¡Transforma una Vida Hoy!</a>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-container">
+      <h3>Progreso de Nuestra Meta Mensual</h3>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-stats">
+        <div class="stat">
+          <div class="stat-number">$777,400</div>
+          <div class="stat-label">Recaudado</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">$3,380,000</div>
+          <div class="stat-label">Meta Mensual</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">23%</div>
+          <div class="stat-label">Completado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="historia">
+    <h2>Nuestra Historia: De la Oscuridad a la Esperanza</h2>
+    <div class="story-content">
+      <p>En 2019, llegamos a San Martín, una pequeña comunidad en la sierra de Oaxaca. Los niños estudiaban con velas porque no había electricidad. Las madres caminaban kilómetros para comunicarse con sus familias. Los jóvenes soñaban con estudiar, pero no tenían acceso a internet.</p>
+      
+      <div class="story-highlight">
+        <h3>El Momento que Cambió Todo</h3>
+        <p>María, una niña de 12 años, nos dijo: "Maestro, ¿por qué en la ciudad los niños pueden estudiar de noche y nosotros no?" Esa pregunta nos partió el corazón y nos motivó a crear Conectando México.</p>
+      </div>
+
+      <p>Hoy, tres años después, San Martín tiene paneles solares, internet de alta velocidad y una biblioteca digital. María ahora toma clases en línea y sueña con ser ingeniera. <strong>Pero hay miles de comunidades como San Martín esperando nuestra ayuda.</strong></p>
+
+      <div class="story-stats">
+        <div class="story-stat">
+          <div class="story-stat-number">47</div>
+          <div class="story-stat-label">Comunidades Conectadas</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-number">12,350</div>
+          <div class="story-stat-label">Vidas Transformadas</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-number">156</div>
+          <div class="story-stat-label">Escuelas Equipadas</div>
+        </div>
+      </div>
+
+      <p><strong>¿Por qué es urgente tu ayuda?</strong> En México, 21 millones de personas viven sin internet y 2.3 millones sin electricidad. Cada día que pasa, más niños pierden oportunidades educativas. Cada mes que esperamos, más familias se quedan atrás en la economía digital.</p>
+    </div>
+  </section>
+
+  <section id="impacto">
+    <h2>Tu Donación Crea Impacto Real</h2>
+    <p style="text-align: center; font-size: 1.2em; margin-bottom: 2rem;">Cada peso que dones se convierte en oportunidades concretas para familias rurales. Así es como tu generosidad transforma vidas:</p>
+    
+    <div class="impact-container">
+      <div class="impact-item">
+        <div class="impact-badge">🌐 Conectividad</div>
+        <div class="impact-item-image">📡</div>
+        <h3>Internet que Conecta Sueños</h3>
+        <p>Instalamos antenas satelitales y redes WiFi que conectan comunidades enteras. Los estudiantes acceden a cursos universitarios en línea, los emprendedores venden sus productos por internet y las familias se comunican con el mundo.</p>
+        <p><strong>Impacto:</strong> 850 familias conectadas el mes pasado</p>
+      </div>
+      
+      <div class="impact-item">
+        <div class="impact-badge">☀️ Energía Limpia</div>
+        <div class="impact-item-image">🔋</div>
+        <h3>Electricidad Solar para Todos</h3>
+        <p>Instalamos sistemas solares comunitarios que iluminan escuelas, centros de salud y hogares. La energía limpia mejora la calidad de vida y protege el medio ambiente.</p>
+        <p><strong>Impacto:</strong> 23 sistemas solares instalados este año</p>
+      </div>
+      
+      <div class="impact-item">
+        <div class="impact-badge">📚 Educación Digital</div>
+        <div class="impact-item-image">💻</div>
+        <h3>Educación Sin Límites</h3>
+        <p>Equipamos escuelas con tabletas, computadoras y acceso a plataformas educativas digitales. Los niños aprenden inglés, programación y habilidades del siglo XXI.</p>
+        <p><strong>Impacto:</strong> 3,240 estudiantes con acceso a educación digital</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios">
+    <h2>Historias que Inspiran</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p>Antes de Conectando México, mis alumnos abandonaban la escuela al oscurecer. Ahora tenemos paneles solares y clases nocturnas. Tres de mis estudiantes ya están en la universidad estudiando carreras en línea.</p>
+        <cite>
+          <div class="testimonial-avatar">JP</div>
+          <div>
+            <strong>Prof. Juan Pérez</strong><br>
+            Maestro rural en Chiapas
+          </div>
+        </cite>
+      </div>
+      
+      <div class="testimonial">
+        <p>Mi hija María ahora toma clases de inglés por internet y vende sus artesanías en redes sociales. Gracias a ustedes, nuestra comunidad ya no está aislada del mundo.</p>
+        <cite>
+          <div class="testimonial-avatar">CR</div>
+          <div>
+            <strong>Carmen Rodríguez</strong><br>
+            Madre de familia, Oaxaca
+          </div>
+        </cite>
+      </div>
+      
+      <div class="testimonial">
+        <p>Doné $300 pesos y recibí fotos de los niños usando las computadoras que ayudé a comprar. Ver sus sonrisas no tiene precio. Ahora dono mensualmente.</p>
+        <cite>
+          <div class="testimonial-avatar">AG</div>
+          <div>
+            <strong>Ana García</strong><br>
+            Donadora desde CDMX
+          </div>
+        </cite>
+      </div>
+    </div>
+  </section>
+
+  <section id="donar">
+    <div class="donation-header">
+      <h2>¡Tu Ayuda es Urgente!</h2>
+      <p style="font-size: 1.2em;">Tenemos 15 comunidades esperando ser conectadas. Necesitamos tu apoyo para llevarles esperanza este mes.</p>
+    </div>
+    
+    <div class="donation-urgency">
+      <h3>🚨 Meta Crítica: Faltan $2,602,600 MXN</h3>
+      <p>Necesitamos completar nuestra meta mensual en los próximos 18 días para conectar las comunidades de Guerrero, Chiapas y Oaxaca que están esperando.</p>
+    </div>
+    
+    <div class="donation-options">
+      <a href="https://mpago.la/1oVE5tm" target="_blank">
+        <strong>$40 MXN</strong><br>
+        <small>1 día de internet para 1 familia</small>
+      </a>
+      <a href="https://mpago.la/1QUXCGH" target="_blank">
+        <strong>$100 MXN</strong><br>
+        <small>Material escolar digital</small>
+      </a>
+      <a href="https://mpago.la/2e7bjVp" target="_blank">
+        <strong>$300 MXN</strong><br>
+        <small>1 semana de clases en línea</small>
+      </a>
+      <a href="https://mpago.la/2tjPK5x" target="_blank">
+        <strong>$500 MXN</strong><br>
+        <small>Panel solar para 1 aula</small>
+      </a>
+      <a href="https://link.mercadopago.com.mx/conectandomexico" target="_blank">
+        <strong>Otro Monto</strong><br>
+        <small>Elige tu contribución</small>
+      </a>
+    </div>
+    
+    <div class="donation-impact">
+      <h3>¿Qué Logra tu Donación?</h3>
+      <ul class="impact-list">
+        <li><strong>$40 MXN:</strong> Proporciona internet por 1 día a una familia rural</li>
+        <li><strong>$100 MXN:</strong> Compra material educativo digital para 1 estudiante</li>
+        <li><strong>$300 MXN:</strong> Financia 1 semana de clases en línea para 20 niños</li>
+        <li><strong>$500 MXN:</strong> Instala 1 panel solar pequeño para iluminar 1 aula</li>
+        <li><strong>$1,000 MXN:</strong> Equipa 1 centro comunitario con WiFi por 1 mes</li>
+        <li><strong>$2,500 MXN:</strong> Conecta 1 familia completa por 1 año</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="trust-section">
+    <h2>Tu Donación Está Segura</h2>
+    <p>Somos una organización transparente comprometida con el uso responsable de cada peso donado.</p>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <h4>🔒 Pagos Seguros</h4>
+        <p>Mercado Pago - Encriptación SSL</p>
+      </div>
+      <div class="trust-badge">
+        <h4>📊 Transparencia Total</h4>
+        <p>Reportes mensuales de gastos</p>
+      </div>
+      <div class="trust-badge">
+        <h4>✅ Impacto Verificado</h4>
+        <p>Fotos y videos de cada proyecto</p>
+      </div>
+      <div class="trust-badge">
+        <h4>🏆 Reconocimiento</h4>
+        <p>Certificado de donación deducible</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><strong>Conectando México</strong> &ndash; Transformando el futuro de las comunidades rurales, una conexión a la vez.</p>
+      <div class="footer-links">
+        <a href="mailto:info@conectandomexico.org">info@conectandomexico.org</a>
+        <a href="https://drive.google.com/file/d/1mEEgMv5D2wh5tCs54Z3qAjbayPiAivLU/view?usp=sharing" target="_blank">Política de Privacidad</a>
+        <a href="https://drive.google.com/file/d/1-1fAsF66he5e2LJe27xj-G03TdPacYIN/view?usp=sharing" target="_blank">Aviso de Privacidad</a>
+        <a href="https://wa.link/pofujf" target="_blank">Contacto</a>
+      </div>
+      <p style="margin-top: 1rem; opacity: 0.8;">© 2024 Conectando México. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Asegurar que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function() {
+      // Función para toggle del menú móvil
+      function toggleMobileMenu() {
+        const mobileNav = document.getElementById('mobile-nav');
+        mobileNav.classList.toggle('active');
+      }
+
+      // Event listeners
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+      const languageSelector = document.getElementById('language-selector');
+
+      // Toggle menú móvil
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+      // Cerrar menú móvil cuando se hace clic en un link
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+      });
+
+      // Cambio de idioma
+      languageSelector.addEventListener('change', function() {
+        changeLanguage(this.value);
+      });
+
+      // Función para cambiar idioma
+      function changeLanguage(language) {
+        if (language === 'en') {
+          // Crear versión en inglés
+          document.title = 'Connecting Mexico - Transforming the Future of Rural Communities';
+          document.querySelector('html').setAttribute('lang', 'en');
+          
+          // Actualizar contenido principal
+          document.querySelector('.hero h1').textContent = 'Light Up Hope in Rural Mexico';
+          document.querySelector('.hero p').textContent = 'Every donation connects a community to the future. We bring internet, solar power, and digital education to Mexico\'s most forgotten places.';
+          document.querySelector('.btn-primary').textContent = 'Transform a Life Today!';
+          
+          // Actualizar navegación
+          const navLinks = document.querySelectorAll('#desktop-nav a');
+          navLinks[0].textContent = 'Home';
+          
