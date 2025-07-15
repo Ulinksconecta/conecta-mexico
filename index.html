@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang-es="Conectando México - Transformando el Futuro de las Comunidades Rurales" data-lang-en="Connecting Mexico - Transforming the Future of Rural Communities">Conectando México - Transformando el Futuro de las Comunidades Rurales</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+    
+    /* Header */
+    header { background: linear-gradient(135deg, #004080 0%, #003366 100%); color: #fff; padding: 1rem 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    .header-content { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+    
+    /* Logo Container */
+    .logo-container { display: flex; align-items: center; gap: 1rem; }
+    .logo-image { height: 50px; width: 50px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .logo-image img { width: 100%; height: 100%; object-fit: contain; }
+    .logo-placeholder { color: #004080; font-size: 1.5rem; font-weight: bold; }
+    .logo-text { color: #fff; font-size: 1.2rem; font-weight: bold; }
+    
+    nav { display: flex; gap: 1rem; }
+    nav a { color: #fff; text-decoration: none; padding: 0.5rem 1rem; font-weight: 500; transition: all 0.3s; border-radius: 5px; }
+    nav a:hover { color: #ffcc00; background: rgba(255,255,255,0.1); }
+    .language-switcher select { background: #fff; color: #004080; padding: 0.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; }
+    
+    /* Mobile menu */
+    .mobile-menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+    .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #004080; flex-direction: column; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 999; }
+    .mobile-nav a { padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .mobile-nav.active { display: flex; }
+    
+    /* Hero Section */
+    .hero { background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), radial-gradient(circle at 30% 70%, rgba(255,204,0,0.1), transparent 50%); color: #fff; text-align: center; padding: 4rem 2rem; position: relative; overflow: hidden; min-height: 60vh; display: flex; align-items: center; justify-content: center; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,204,0,0.1) 50%, transparent 70%); }
+    .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero p { font-size: clamp(1.1rem, 3vw, 1.4rem); margin-bottom: 2rem; opacity: 0.95; }
+    .btn-primary { background: linear-gradient(45deg, #ffcc00, #f0b400); color: #000; padding: 1rem 2rem; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2em; box-shadow: 0 4px 15px rgba(255,204,0,0.3); transition: all 0.3s; display: inline-block; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,204,0,0.4); }
+    
+    /* Progress Bar */
+    .progress-section { background: #f8f9fa; padding: 2rem; text-align: center; }
+    .progress-container { max-width: 600px; margin: 0 auto; }
+    .progress-bar { background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden; margin: 1rem 0; }
+    .progress-fill { background: linear-gradient(45deg, #28a745, #20c997); height: 100%; width: 23%; transition: width 0.3s; }
+    .progress-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .stat { text-align: center; padding: 1rem; }
+    .stat-number { font-size: 1.5em; font-weight: bold; color: #004080; }
+    .stat-label { color: #666; font-size: 0.9em; }
+    
+    /* Sections */
+    section { padding: 3rem 2rem; max-width: 1200px; margin: auto; }
+    section h2 { font-size: clamp(2rem, 4vw, 2.5rem); color: #004080; margin-bottom: 1.5rem; text-align: center; }
+    section h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); color: #004080; margin-bottom: 1rem; }
+    
+    /* Story Section */
+    .story-content { max-width: 800px; margin: 0 auto; }
+    .story-highlight { background: linear-gradient(135deg, #fff3cd, #ffeaa7); padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 5px solid #ffcc00; }
+    .story-highlight h3 { color: #856404; margin-bottom: 1rem; }
+    .story-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .story-stat { text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 10px; }
+    .story-stat-number { font-size: 2.5em; font-weight: bold; color: #004080; }
+    .story-stat-label { color: #666; margin-top: 0.5rem; }
+    
+    /* Impact Section */
+    .impact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .impact-item { background: #fff; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .impact-item:hover { transform: translateY(-5px); }
+    .impact-item-image { width: 100%; height: 200px; background: linear-gradient(45deg, #004080, #003366); border-radius: 10px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 3rem; }
+    .impact-item h3 { color: #004080; margin-bottom: 1rem; }
+    .impact-item p { color: #666; margin-bottom: 1rem; }
+    .impact-badge { background: #28a745; color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9em; display: inline-block; margin-bottom: 1rem; }
+    
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .testimonial { background: #fff; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: relative; }
+    .testimonial::before { content: '"'; position: absolute; top: -10px; left: 20px; font-size: 4em; color: #ffcc00; }
+    .testimonial p { font-style: italic; margin-bottom: 1rem; padding-left: 1rem; }
+    .testimonial cite { display: flex; align-items: center; font-style: normal; color: #004080; font-weight: bold; }
+    .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ffcc00; margin-right: 1rem; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; }
+    
+    /* Donation Section */
+    #donar { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px; margin: 2rem; }
+    .donation-header { text-align: center; margin-bottom: 2rem; }
+    .donation-urgency { background: #dc3545; color: #fff; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: center; }
+    .donation-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .donation-options a { display: block; background: linear-gradient(135deg, #004080, #003366); color: #fff; padding: 1.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,64,128,0.3); }
+    .donation-options a:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,64,128,0.4); }
+    .donation-impact { background: #fff; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
+    .donation-impact h3 { color: #004080; margin-bottom: 1rem; }
+    .impact-list { list-style: none; }
+    .impact-list li { margin: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .impact-list li::before { content: '✓'; position: absolute; left: 0; color: #28a745; font-weight: bold; }
+    
+    /* Trust Section */
+    .trust-section { background: #fff; padding: 3rem 2rem; text-align: center; }
+    .trust-badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .trust-badge { padding: 1.5rem; border-radius: 10px; background: #f8f9fa; border: 2px solid #e9ecef; }
+    .trust-badge h4 { color: #004080; margin-bottom: 0.5rem; }
+    .trust-badge p { color: #666; font-size: 0.9em; }
+    
+    /* Footer */
+    footer { background: linear-gradient(135deg, #004080, #003366); color: #fff; padding: 2rem; text-align: center; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .footer-links a { color: #fff; text-decoration: none; padding: 0.5rem; }
+    .footer-links a:hover { color: #ffcc00; }
+    
+    /* Language transition effects */
+    .translating { opacity: 0.7; transition: opacity 0.3s ease; }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content { flex-direction: column; gap: 1rem; }
+      .mobile-menu-toggle { display: block; }
+      nav { display: none; }
+      .hero { padding: 3rem 1rem; }
+      section { padding: 2rem 1rem; }
+      .donation-options { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .impact-container { grid-template-columns: 1fr; }
+      .trust-badges { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 1rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1rem; }
+      .story-stats { grid-template-columns: 1fr; }
+      .progress-stats { grid-template-columns: 1fr; }
+      .btn-primary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <div class="logo-image">
+          <img src="assets/logo-conectando-mexico.png" alt="Logo Conectando México">
+        </div>
+        <div class="logo-text" data-lang-es="Conectando México" data-lang-en="Connecting Mexico">Conectando México</div>
+      </div>
+      <button class="mobile-menu-toggle" id="mobile-menu-btn">☰</button>
+      <nav id="desktop-nav">
+        <a href="#inicio" data-lang-es="Inicio" data-lang-en="Home">Inicio</a>
+        <a href="#historia" data-lang-es="Nuestra Historia" data-lang-en="Our Story">Nuestra Historia</a>
+        <a href="#impacto" data-lang-es="Impacto" data-lang-en="Impact">Impacto</a>
+        <a href="#testimonios" data-lang-es="Testimonios" data-lang-en="Testimonials">Testimonios</a>
+        <a href="#donar" data-lang-es="Donar" data-lang-en="Donate">Donar</a>
+      </nav>
+      <nav class="mobile-nav" id="mobile-nav">
+        <a href="#inicio" data-lang-es="Inicio" data-lang-en="Home">Inicio</a>
+        <a href="#historia" data-lang-es="Nuestra Historia" data-lang-en="Our Story">Nuestra Historia</a>
+        <a href="#impacto" data-lang-es="Impacto" data-lang-en="Impact">Impacto</a>
+        <a href="#testimonios" data-lang-es="Testimonios" data-lang-en="Testimonials">Testimonios</a>
+        <a href="#donar" data-lang-es="Donar" data-lang-en="Donate">Donar</a>
+      </nav>
+      <div class="language-switcher">
+        <select id="language-selector">
+          <option value="es" selected>Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero" id="inicio">
+    <div class="hero-content">
+      <h1 data-lang-es="Enciende la Esperanza en México Rural" data-lang-en="Light Up Hope in Rural Mexico">Enciende la Esperanza en México Rural</h1>
+      <p data-lang-es="Cada donación conecta una comunidad al futuro. Llevamos internet, electricidad solar y educación digital a los lugares más olvidados de México." data-lang-en="Every donation connects a community to the future. We bring internet, solar power, and digital education to Mexico's most forgotten places.">Cada donación conecta una comunidad al futuro. Llevamos internet, electricidad solar y educación digital a los lugares más olvidados de México.</p>
+      <a href="#donar" class="btn-primary" data-lang-es="¡Transforma una Vida Hoy!" data-lang-en="Transform a Life Today!">¡Transforma una Vida Hoy!</a>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-container">
+      <h3 data-lang-es="Progreso de Nuestra Meta Mensual" data-lang-en="Progress of Our Monthly Goal">Progreso de Nuestra Meta Mensual</h3>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-stats">
+        <div class="stat">
+          <div class="stat-number">$777,400</div>
+          <div class="stat-label" data-lang-es="Recaudado" data-lang-en="Raised">Recaudado</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">$3,380,000</div>
+          <div class="stat-label" data-lang-es="Meta Mensual" data-lang-en="Monthly Goal">Meta Mensual</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">23%</div>
+          <div class="stat-label" data-lang-es="Completado" data-lang-en="Completed">Completado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="historia">
+    <h2 data-lang-es="Nuestra Historia: De la Oscuridad a la Esperanza" data-lang-en="Our Story: From Darkness to Hope">Nuestra Historia: De la Oscuridad a la Esperanza</h2>
+    <div class="story-content">
+      <p data-lang-es="En 2019, llegamos a San Martín, una pequeña comunidad en la sierra de Oaxaca. Los niños estudiaban con velas porque no había electricidad. Las madres caminaban kilómetros para comunicarse con sus familias. Los jóvenes soñaban con estudiar, pero no tenían acceso a internet." data-lang-en="In 2019, we arrived at San Martín, a small community in the mountains of Oaxaca. Children studied by candlelight because there was no electricity. Mothers walked kilometers to communicate with their families. Young people dreamed of studying, but had no internet access.">En 2019, llegamos a San Martín, una pequeña comunidad en la sierra de Oaxaca. Los niños estudiaban con velas porque no había electricidad. Las madres caminaban kilómetros para comunicarse con sus familias. Los jóvenes soñaban con estudiar, pero no tenían acceso a internet.</p>
+      
+      <div class="story-highlight">
+        <h3 data-lang-es="El Momento que Cambió Todo" data-lang-en="The Moment That Changed Everything">El Momento que Cambió Todo</h3>
+        <p data-lang-es="María, una niña de 12 años, nos dijo: 'Maestro, ¿por qué en la ciudad los niños pueden estudiar de noche y nosotros no?' Esa pregunta nos partió el corazón y nos motivó a crear Conectando México." data-lang-en="María, a 12-year-old girl, told us: 'Teacher, why can children in the city study at night and we can't?' That question broke our hearts and motivated us to create Connecting Mexico.">María, una niña de 12 años, nos dijo: "Maestro, ¿por qué en la ciudad los niños pueden estudiar de noche y nosotros no?" Esa pregunta nos partió el corazón y nos motivó a crear Conectando México.</p>
+      </div>
+
+      <p data-lang-es="Hoy, tres años después, San Martín tiene paneles solares, internet de alta velocidad y una biblioteca digital. María ahora toma clases en línea y sueña con ser ingeniera. Pero hay miles de comunidades como San Martín esperando nuestra ayuda." data-lang-en="Today, three years later, San Martín has solar panels, high-speed internet, and a digital library. María now takes online classes and dreams of becoming an engineer. But there are thousands of communities like San Martín waiting for our help.">Hoy, tres años después, San Martín tiene paneles solares, internet de alta velocidad y una biblioteca digital. María ahora toma clases en línea y sueña con ser ingeniera. <strong>Pero hay miles de comunidades como San Martín esperando nuestra ayuda.</strong></p>
+
+      <div class="story-stats">
+        <div class="story-stat">
+          <div class="story-stat-number">47</div>
+          <div class="story-stat-label" data-lang-es="Comunidades Conectadas" data-lang-en="Connected Communities">Comunidades Conectadas</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-number">12,350</div>
+          <div class="story-stat-label" data-lang-es="Vidas Transformadas" data-lang-en="Lives Transformed">Vidas Transformadas</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-number">156</div>
+          <div class="story-stat-label" data-lang-es="Escuelas Equipadas" data-lang-en="Schools Equipped">Escuelas Equipadas</div>
+        </div>
+      </div>
+
+      <p data-lang-es="¿Por qué es urgente tu ayuda? En México, 21 millones de personas viven sin internet y 2.3 millones sin electricidad. Cada día que pasa, más niños pierden oportunidades educativas. Cada mes que esperamos, más familias se quedan atrás en la economía digital." data-lang-en="Why is your help urgent? In Mexico, 21 million people live without internet and 2.3 million without electricity. Every day that passes, more children lose educational opportunities. Every month we wait, more families fall behind in the digital economy."><strong>¿Por qué es urgente tu ayuda?</strong> En México, 21 millones de personas viven sin internet y 2.3 millones sin electricidad. Cada día que pasa, más niños pierden oportunidades educativas. Cada mes que esperamos, más familias se quedan atrás en la economía digital.</p>
+    </div>
+  </section>
+
+  <section id="impacto">
+    <h2 data-lang-es="Tu Donación Crea Impacto Real" data-lang-en="Your Donation Creates Real Impact">Tu Donación Crea Impacto Real</h2>
+    <p style="text-align: center; font-size: 1.2em; margin-bottom: 2rem;" data-lang-es="Cada peso que dones se convierte en oportunidades concretas para familias rurales. Así es como tu generosidad transforma vidas:" data-lang-en="Every peso you donate becomes concrete opportunities for rural families. This is how your generosity transforms lives:">Cada peso que dones se convierte en oportunidades concretas para familias rurales. Así es como tu generosidad transforma vidas:</p>
+    
+    <div class="impact-container">
+      <div class="impact-item">
+        <div class="impact-badge" data-lang-es="🌐 Conectividad" data-lang-en="🌐 Connectivity">🌐 Conectividad</div>
+        <img src="assets/antena-instalacion.jpg" alt="Antena de instalación" class="impact-item-image" style="object-fit: cover;">
+        <h3 data-lang-es="Internet que Conecta Sueños" data-lang-en="Internet that Connects Dreams">Internet que Conecta Sueños</h3>
+        <p data-lang-es="Instalamos antenas satelitales y redes WiFi que conectan comunidades enteras. Los estudiantes acceden a cursos universitarios en línea, los emprendedores venden sus productos por internet y las familias se comunican con el mundo." data-lang-en="We install satellite antennas and WiFi networks that connect entire communities. Students access university courses online, entrepreneurs sell their products on the internet, and families communicate with the world.">Instalamos antenas satelitales y redes WiFi que conectan comunidades enteras. Los estudiantes acceden a cursos universitarios en línea, los emprendedores venden sus productos por internet y las familias se comunican con el mundo.</p>
+        <p><strong data-lang-es="Impacto:" data-lang-en="Impact:">Impacto:</strong> <span data-lang-es="850 familias conectadas el mes pasado" data-lang-en="850 families connected last month">850 familias conectadas el mes pasado</span></p>
+      </div>
+      
+      <div class="impact-item">
+        <div class="impact-badge" data-lang-es="☀️ Energía Limpia" data-lang-en="☀️ Clean Energy">☀️ Energía Limpia</div>
+        <img src="assets/paneles-solares-instalacion.jpg" alt="Paneles solares en instalación" class="impact-item-image" style="object-fit: cover;">
+        <h3 data-lang-es="Electricidad Solar para Todos" data-lang-en="Solar Electricity for Everyone">Electricidad Solar para Todos</h3>
+        <p data-lang-es="Instalamos sistemas solares comunitarios que iluminan escuelas, centros de salud y hogares. La energía limpia mejora la calidad de vida y protege el medio ambiente." data-lang-en="We install community solar systems that illuminate schools, health centers, and homes. Clean energy improves quality of life and protects the environment.">Instalamos sistemas solares comunitarios que iluminan escuelas, centros de salud y hogares. La energía limpia mejora la calidad de vida y protege el medio ambiente.</p>
+        <p><strong data-lang-es="Impacto:" data-lang-en="Impact:">Impacto:</strong> <span data-lang-es="23 sistemas solares instalados este año" data-lang-en="23 solar systems installed this year">23 sistemas solares instalados este año</span></p>
+      </div>
+      
+      <div class="impact-item">
+        <div class="impact-badge" data-lang-es="📚 Educación Digital" data-lang-en="📚 Digital Education">📚 Educación Digital</div>
+        <img src="assets/estudiante-rural-computadora.jpg" alt="Estudiante rural usando computadora" class="impact-item-image" style="object-fit: cover;">
+        <h3 data-lang-es="Educación Sin Límites" data-lang-en="Education Without Limits">Educación Sin Límites</h3>
+        <p data-lang-es="Equipamos escuelas con tabletas, computadoras y acceso a plataformas educativas digitales. Los niños aprenden inglés, programación y habilidades del siglo XXI." data-lang-en="We equip schools with tablets, computers, and access to digital educational platforms. Children learn English, programming, and 21st-century skills.">Equipamos escuelas con tabletas, computadoras y acceso a plataformas educativas digitales. Los niños aprenden inglés, programación y habilidades del siglo XXI.</p>
+        <p><strong data-lang-es="Impacto:" data-lang-en="Impact:">Impacto:</strong> <span data-lang-es="3,240 estudiantes con acceso a educación digital" data-lang-en="3,240 students with access to digital education">3,240 estudiantes con acceso a educación digital</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios">
+    <h2 data-lang-es="Historias que Inspiran" data-lang-en="Stories that Inspire">Historias que Inspiran</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p data-lang-es="Antes de Conectando México, mis alumnos abandonaban la escuela al oscurecer. Ahora tenemos paneles solares y clases nocturnas. Tres de mis estudiantes ya están en la universidad estudiando carreras en línea." data-lang-en="Before Connecting Mexico, my students left school at dusk. Now we have solar panels and night classes. Three of my students are already in university studying online careers.">Antes de Conectando México, mis alumnos abandonaban la escuela al oscurecer. Ahora tenemos paneles solares y clases nocturnas. Tres de mis estudiantes ya están en la universidad estudiando carreras en línea.</p>
+        <cite>
+          <div class="testimonial-avatar">JP</div>
+          <div>
+            <strong data-lang-es="Prof. Juan Pérez" data-lang-en="Prof. Juan Pérez">Prof. Juan Pérez</strong><br>
+            <span data-lang-es="Maestro rural en Chiapas" data-lang-en="Rural teacher in Chiapas">Maestro rural en Chiapas</span>
+          </div>
+        </cite>
+      </div>
+      
+      <div class="testimonial">
+        <p data-lang-es="Mi hija María ahora toma clases de inglés por internet y vende sus artesanías en redes sociales. Gracias a ustedes, nuestra comunidad ya no está aislada del mundo." data-lang-en="My daughter María now takes English classes online and sells her crafts on social media. Thanks to you, our community is no longer isolated from the world.">Mi hija María ahora toma clases de inglés por internet y vende sus artesanías en redes sociales. Gracias a ustedes, nuestra comunidad ya no está aislada del mundo.</p>
+        <cite>
+          <div class="testimonial-avatar">CR</div>
+          <div>
+            <strong data-lang-es="Carmen Rodríguez" data-lang-en="Carmen Rodríguez">Carmen Rodríguez</strong><br>
+            <span data-lang-es="Madre de familia, Oaxaca" data-lang-en="Mother, Oaxaca">Madre de familia, Oaxaca</span>
+          </div>
+        </cite>
+      </div>
+      
+      <div class="testimonial">
+        <p data-lang-es="Doné $300 pesos y recibí fotos de los niños usando las computadoras que ayudé a comprar. Ver sus sonrisas no tiene precio. Ahora dono mensualmente." data-lang-en="I donated $300 pesos and received photos of children using the computers I helped buy. Seeing their smiles is priceless. Now I donate monthly.">Doné $300 pesos y recibí fotos de los niños usando las computadoras que ayudé a comprar. Ver sus sonrisas no tiene precio. Ahora dono mensualmente.</p>
+        <cite>
+          <div class="testimonial-avatar">AG</div>
+          <div>
+            <strong data-lang-es="Ana García" data-lang-en="Ana García">Ana García</strong><br>
+            <span data-lang-es="Donadora desde CDMX" data-lang-en="Donor from Mexico City">Donadora desde CDMX</span>
+          </div>
+        </cite>
+      </div>
+    </div>
+  </section>
+
+  <section id="donar">
+    <div class="donation-header">
+      <h2 data-lang-es="¡Tu Ayuda es Urgente!" data-lang-en="Your Help is Urgent!">¡Tu Ayuda es Urgente!</h2>
+      <p style="font-size: 1.2em;" data-lang-es="Tenemos 15 comunidades esperando ser conectadas. Necesitamos tu apoyo para llevarles esperanza este mes." data-lang-en="We have 15 communities waiting to be connected. We need your support to bring them hope this month.">Tenemos 15 comunidades esperando ser conectadas. Necesitamos tu apoyo para llevarles esperanza este mes.</p>
+    </div>
+    
+    <div class="donation-urgency">
+      <h3 data-lang-es="🚨 Meta Crítica: Faltan $2,602,600 MXN" data-lang-en="🚨 Critical Goal: $2,602,600 MXN Needed">🚨 Meta Crítica: Faltan $2,602,600 MXN</h3>
+      <p data-lang-es="Necesitamos completar nuestra meta mensual en los próximos 18 días para conectar las comunidades de Guerrero, Chiapas y Oaxaca que están esperando." data-lang-en="We need to complete our monthly goal in the next 18 days to connect the communities in Guerrero, Chiapas, and Oaxaca that are waiting.">Necesitamos completar nuestra meta mensual en los próximos 18 días para conectar las comunidades de Guerrero, Chiapas y Oaxaca que están esperando.</p>
+    </div>
+    
+    <div class="donation-options">
+      <a href="https://mpago.la/1oVE5tm" target="_blank">
+        <strong>$40 MXN</strong><br>
+        <small data-lang-es="1 día de internet para 1 familia" data-lang-en="1 day of internet for 1 family">1 día de internet para 1 familia</small>
+      </a>
+      <a href="https://mpago.la/1QUXCGH" target="_blank">
+        <strong>$100 MXN</strong><br>
+        <small data-lang-es="Material escolar digital" data-lang-en="Digital school materials">Material escolar digital</small>
+      </a>
+      <a href="https://mpago.la/2e7bjVp" target="_blank">
+        <strong>$300 MXN</strong><br>
+        <small data-lang-es="1 semana de clases en línea" data-lang-en="1 week of online classes">1 semana de clases en línea</small>
+      </a>
+      <a href="https://mpago.la/2tjPK5x" target="_blank">
+        <strong>$500 MXN</strong><br>
+        <small data-lang-es="Panel solar para 1 aula" data-lang-en="Solar panel for 1 classroom">Panel solar para 1 aula</small>
+      </a>
+      <a href="https://link.mercadopago.com.mx/conectandomexico" target="_blank">
+        <strong data-lang-es="Otro Monto" data-lang-en="Other Amount">Otro Monto</strong><br>
+        <small data-lang-es="Elige tu contribución" data-lang-en="Choose your contribution">Elige tu contribución</small>
+      </a>
+    </div>
+    
+    <div class="donation-impact">
+      <h3 data-lang-es="¿Qué Logra tu Donación?" data-lang-en="What Does Your Donation Achieve?">¿Qué Logra tu Donación?</h3>
+      <ul class="impact-list">
+        <li><strong>$40 MXN:</strong> <span data-lang-es="Proporciona internet por 1 día a una familia rural" data-lang-en="Provides internet for 1 day to a rural family">Proporciona internet por 1 día a una familia rural</span></li>
+        <li><strong>$100 MXN:</strong> <span data-lang-es="Compra material educativo digital para 1 estudiante" data-lang-en="Buys digital educational material for 1 student">Compra material educativo digital para 1 estudiante</span></li>
+        <li><strong>$300 MXN:</strong> <span data-lang-es="Financia 1 semana de clases en línea para 20 niños" data-lang-en="Finances 1 week of online classes for 20 children">Financia 1 semana de clases en línea para 20 niños</span></li>
+        <li><strong>$500 MXN:</strong> <span data-lang-es="Instala 1 panel solar pequeño para iluminar 1 aula" data-lang-en="Installs 1 small solar panel to illuminate 1 classroom">Instala 1 panel solar pequeño para iluminar 1 aula</span></li>
+        <li><strong>$1,000 MXN:</strong> <span data-lang-es="Equipa 1 centro comunitario con WiFi por 1 mes" data-lang-en="Equips 1 community center with WiFi for 1 month">Equipa 1 centro comunitario con WiFi por 1 mes</span></li>
+        <li><strong>$2,500 MXN:</strong> <span data-lang-es="Conecta 1 familia completa por 1 año" data-lang-en="Connects 1 complete family for 1 year">Conecta 1 familia completa por 1 año</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="trust-section">
+    <h2 data-lang-es="Tu Donación Está Segura" data-lang-en="Your Donation is Safe">Tu Donación Está Segura</h2>
+    <p data-lang-es="Somos una organización transparente comprometida con el uso responsable de cada peso donado." data-lang-en="We are a transparent organization committed to the responsible use of every peso donated.">Somos una organización transparente comprometida con el uso responsable de cada peso donado.</p>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <h4 data-lang-es="🔒 Pagos Seguros" data-lang-en="🔒 Secure Payments">🔒 Pagos Seguros</h4>
+        <p data-lang-es="Mercado Pago - Encriptación SSL" data-lang-en="Mercado Pago - SSL Encryption">Mercado Pago - Encriptación SSL</p>
+      </div>
+      <div class="trust-badge">
+        <h4 data-lang-es="📊 Transparencia Total" data-lang-en="📊 Total Transparency">📊 Transparencia Total</h4>
+        <p data-lang-es="Reportes mensuales de gastos" data-lang-en="Monthly expense reports">Reportes mensuales de gastos</p>
+      </div>
+      <div class="trust-badge">
+        <h4 data-lang-es="✅ Impacto Verificado" data-lang-en="✅ Verified Impact">✅ Impacto Verificado</h4>
+        <p data-lang-es="Fotos y videos de cada proyecto" data-lang-en="Photos and videos of each project">Fotos y videos de cada proyecto</p>
+      </div>
+      <div class="trust-badge">
+        <h4 data-lang-es="🏆 Reconocimiento" data-lang-en="🏆 Recognition">🏆 Reconocimiento</h4>
+        <p data-lang-es="Certificado de donación deducible" data-lang-en="Deductible donation certificate">Certificado de donación deducible</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><strong data-lang-es="Conectando México" data-lang-en="Connecting Mexico">Conectando México</strong> &ndash; <span data-lang-es="Transformando el futuro de las comunidades rurales, una conexión a la vez." data-lang-en="Transforming the future of rural communities, one connection at a time.">Transformando el futuro de las comunidades rurales, una conexión a la vez.</span></p>
+      <div class="footer-links">
+        <a href="mailto:info@conectandomexico.org">info@conectandomexico.org</a>
+        <a href="https://drive.google.com/file/d/1mEEgMv5D2wh5tCs54Z3qAjbayPiAivLU/view?usp=sharing" target="_blank" data-lang-es="Política de Privacidad" data-lang-en="Privacy Policy">Política de Privacidad</a>
+        <a href="https://drive.google.com/file/d/1-1fAsF66he5e2LJe27xj-G03TdPacYIN/view?usp=sharing" target="_blank" data-lang-es="Aviso de Transparencia" data-lang-en="Transparency Notice">Aviso de Transparencia</a>
+        <a href="https://wa.link/pofujf" target="_blank" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a>
+      </div>
+      <p style="margin-top: 1rem; opacity: 0.8;" data-lang-es="© 2024 Conectando México. Todos los derechos reservados." data-lang-en="© 2024 Connecting Mexico. All rights reserved.">© 2024 Conectando México. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Sistema de traducción completo con persistencia
+    class LanguageManager {
+      constructor() {
+        this.currentLanguage = this.getStoredLanguage() || 'es';
+        this.init();
+      }
+
+      init() {
+        // Configurar el selector de idioma
+        const languageSelector = document.getElementById('language-selector');
+        if (languageSelector) {
+          languageSelector.value = this.currentLanguage;
+          languageSelector.addEventListener('change', (e) => {
+            this.changeLanguage(e.target.value);
+          });
+        }
+
+        // Aplicar el idioma inicial
+        this.applyLanguage(this.currentLanguage);
+
+        // Configurar menú móvil
+        this.setupMobileMenu();
+      }
+
+      getStoredLanguage() {
+        try {
+          return localStorage.getItem('conectando-mexico-language');
+        } catch (e) {
+          return null;
+        }
+      }
+
+      storeLanguage(language) {
+        try {
+          localStorage.setItem('conectando-mexico-language', language);
+        } catch (e) {
+          console.warn('No se pudo guardar el idioma en localStorage');
+        }
+      }
+
+      changeLanguage(language) {
+        if (language === this.currentLanguage) return;
+        
+        this.currentLanguage = language;
+        this.storeLanguage(language);
+        this.applyLanguage(language);
+      }
+
+      applyLanguage(language) {
+        // Añadir clase de transición
+        document.body.classList.add('translating');
+
+        // Actualizar el atributo lang del HTML
+        document.documentElement.setAttribute('lang', language);
+
+        // Actualizar el título de la página
+        const title = document.querySelector('title');
+        if (title && title.hasAttribute(`data-lang-${language}`)) {
+          title.textContent = title.getAttribute(`data-lang-${language}`);
+        }
+
+        // Actualizar todos los elementos con atributos de traducción
+        const elementsToTranslate = document.querySelectorAll(`[data-lang-${language}]`);
+        
+        elementsToTranslate.forEach(element => {
+          const translatedText = element.getAttribute(`data-lang-${language}`);
+          if (translatedText) {
+            // Preservar HTML interno si es necesario
+            if (element.innerHTML.includes('<')) {
+              // Si el elemento contiene HTML, solo actualizar el texto directo
+              const textNodes = this.getTextNodes(element);
+              if (textNodes.length === 1) {
+                textNodes[0].textContent = translatedText;
+              } else {
+                element.innerHTML = translatedText;
+              }
+            } else {
+              element.textContent = translatedText;
+            }
+          }
+        });
+
+        // Remover clase de transición después de un breve delay
+        setTimeout(() => {
+          document.body.classList.remove('translating');
+        }, 300);
+      }
+
+      getTextNodes(element) {
+        const textNodes = [];
+        const walker = document.createTreeWalker(
+          element,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+
+        let node;
+        while (node = walker.nextNode()) {
+          if (node.textContent.trim()) {
+            textNodes.push(node);
+          }
+        }
+        return textNodes;
+      }
+
+      setupMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+        if (mobileMenuBtn && mobileNav) {
+          mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+          });
+
+          // Cerrar menú móvil cuando se hace clic en un enlace
+          mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              mobileNav.classList.remove('active');
+            });
+          });
+
+          // Cerrar menú móvil cuando se hace clic fuera de él
+          document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+              mobileNav.classList.remove('active');
+            }
+          });
+        }
+      }
+    }
+
+    // Inicializar el sistema de idiomas cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+      new LanguageManager();
+      
+      // Smooth scrolling para los enlaces de navegación
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
